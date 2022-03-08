@@ -12,7 +12,7 @@ class ShowProfileService {
     const usersRepository = getCustomRepository(UsersRepository);
     const user = await usersRepository.findById(user_id);
     if (!user) {
-      throw new AppError('User not found');
+      throw new AppError('Usuário não encontrado');
     }
     return user;
   }

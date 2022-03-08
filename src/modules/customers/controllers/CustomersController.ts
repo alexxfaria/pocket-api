@@ -7,11 +7,37 @@ import UpdateCustomerService from '../services/UpdateCustomerService';
 
 class CustomersController {
   public async create(req: Request, res: Response): Promise<Response> {
-    const { name, email } = req.body;
+    const {
+      name,
+      email,
+      cnpj,
+      cpf,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      estado,
+      pais,
+      cep,
+    } = req.body;
 
     const createCustomers = new CreateCustomerService();
 
-    const customers = await createCustomers.execute({ name, email });
+    const customers = await createCustomers.execute({
+      name,
+      email,
+      cnpj,
+      cpf,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      estado,
+      pais,
+      cep,
+    });
 
     return res.json(customers);
   }
@@ -32,12 +58,39 @@ class CustomersController {
     return res.json(customers);
   }
   public async update(req: Request, res: Response): Promise<Response> {
-    const { name, email } = req.body;
+    const {
+      name,
+      email,
+      cnpj,
+      cpf,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      estado,
+      pais,
+      cep,
+    } = req.body;
     const { id } = req.params;
 
     const updateCustomer = new UpdateCustomerService();
 
-    const customer = await updateCustomer.execute({ id, name, email });
+    const customer = await updateCustomer.execute({
+      id,
+      name,
+      email,
+      cnpj,
+      cpf,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      estado,
+      pais,
+      cep,
+    });
 
     return res.json(customer);
   }

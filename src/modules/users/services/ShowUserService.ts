@@ -12,7 +12,7 @@ class ShowUserService {
     const usersRepository = getCustomRepository(UsersRepository);
     const user = await usersRepository.findOne(id);
     if (!user) {
-      throw new AppError('User not found');
+      throw new AppError('Usuário não encontrado.');
     }
     return user;
   }

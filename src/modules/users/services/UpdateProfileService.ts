@@ -19,12 +19,12 @@ class UpdateProfileService {
     const user = await usersRepository.findOne(user_id);
 
     if (!user) {
-      throw new AppError('User not exist.');
+      throw new AppError('Usuário não encontrado.');
     }
     const usersExists = await usersRepository.findByName(email);
 
     if (usersExists && usersExists.id != user_id) {
-      throw new AppError('There is already one user with this email.');
+      throw new AppError('Esse e-mail ja está cadastrado.');
     }
 
     if (usersExists && email != user.email) {
@@ -32,14 +32,14 @@ class UpdateProfileService {
     }
 
     if (password && !old_password) {
-      throw new AppError('Old password is required.');
+      throw new AppError('Senha obrigatória.');
     }
 
     if (password && old_password) {
       const checkOldPassword = await compare(old_password, user.password);
 
       if (!checkOldPassword) {
-        throw new AppError('Old password does not match.');
+        throw new AppError('Senha antiga não confere.');
       }
       user.password = await hash(password, 8);
     }

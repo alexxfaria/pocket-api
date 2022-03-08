@@ -16,7 +16,7 @@ class ShowCustomerService {
     const customerRepository = getCustomRepository(CustomersRepository);
     const customers = await customerRepository.findOne(id);
     if (!customers) {
-      throw new AppError('User not found');
+      throw new AppError('Parceiro não encontrado.');
     }
     return customers;
   }
@@ -24,7 +24,7 @@ class ShowCustomerService {
     const customerRepository = getCustomRepository(CustomersRepository);
     const customers = await customerRepository.findOne(name);
     if (!customers) {
-      throw new AppError('User not found');
+      throw new AppError('Parceiro não encontrado.');
     }
     return customers;
   }

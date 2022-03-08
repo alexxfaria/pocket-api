@@ -9,10 +9,11 @@ interface IRequest {
   name: string;
   email: string;
   password: string;
+  phone: string;
 }
 
 class UpdateUserService {
-  public async execute({ id, name, email, password }: IRequest): Promise<User> {
+  public async execute({ id, name, email, password, phone }: IRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
     const user = await usersRepository.findOne(id);
     if (!user) {
@@ -29,6 +30,7 @@ class UpdateUserService {
     user.name = name;
     user.email = email;
     user.password = hashedPassword;
+    user.phone = phone;
 
     await usersRepository.save(user);
     return user;
