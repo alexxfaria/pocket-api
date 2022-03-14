@@ -25,42 +25,52 @@ export class CreateCustomers1642424440886 implements MigrationInterface {
           {
             name: 'cnpj',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'cpf',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'logradouro',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'numero',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'complemento',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'bairro',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'cidade',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'estado',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'pais',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'cep',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'created_at',
