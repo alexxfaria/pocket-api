@@ -5,13 +5,14 @@ import uploadConfig from '@config/upload';
 import { celebrate, Joi, Segments } from 'celebrate';
 import isAuthenticated from '../../../shared/http/middlewares/isAuthenticated';
 import UserAvatarController from '../controllers/UsersAvatarController';
+import { ensureAdmin } from '../../../shared/http/middlewares/ensureAdmin';
 
 const usersRouter = Router();
 const usersController = new UserController();
 const usersAvatarController = new UserAvatarController();
 const upload = multer(uploadConfig);
 
-usersRouter.get('/', isAuthenticated, usersController.index);
+usersRouter.get('/', isAuthenticated, ensureAdmin, usersController.index);
 
 usersRouter.get(
   '/:id',
@@ -32,7 +33,6 @@ usersRouter.post(
       password: Joi.string().required(),
       phone: Joi.string().required(),
       admin: Joi.boolean(),
-      avatar: Joi.string(),
     },
   }),
   usersController.create,
@@ -47,7 +47,6 @@ usersRouter.put(
       password: Joi.string().required(),
       phone: Joi.string(),
       admin: Joi.boolean(),
-      avatar: Joi.string(),
     },
     [Segments.PARAMS]: { id: Joi.string().uuid().required() },
   }),
