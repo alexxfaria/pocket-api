@@ -24,6 +24,9 @@ class User {
   phone: string;
 
   @Column()
+  admin: boolean;
+
+  @Column()
   avatar: string;
 
   @CreateDateColumn()

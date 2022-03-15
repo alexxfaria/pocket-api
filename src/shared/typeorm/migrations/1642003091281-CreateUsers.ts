@@ -33,6 +33,11 @@ export class CreateUsers1642003091281 implements MigrationInterface {
             isUnique: true,
           },
           {
+            name: 'admin',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'avatar',
             type: 'varchar',
             isNullable: true,
