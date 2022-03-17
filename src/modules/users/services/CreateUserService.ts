@@ -10,21 +10,38 @@ interface IRequest {
   password: string;
   phone: string;
   admin: boolean;
-  cnpj?: string;
-  cpf?: string;
-  address?: string;
-  number?: string;
-  complements?: string;
-  district?: string;
-  city?: string;
-  state?: string;
-  country?: string;
-  zip?: string;
-  active?: boolean;
+  cnpj: string;
+  cpf: string;
+  address: string;
+  number: string;
+  complements: string;
+  district: string;
+  city: string;
+  state: string;
+  country: string;
+  zip: string;
+  active: boolean;
 }
 
 class CreateUserService {
-  public async execute({ name, email, password, phone, admin }: IRequest): Promise<User> {
+  public async execute({
+    name,
+    email,
+    password,
+    phone,
+    admin,
+    cnpj,
+    cpf,
+    address,
+    number,
+    complements,
+    district,
+    city,
+    state,
+    country,
+    zip,
+    active,
+  }: IRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
     const emailExists = await usersRepository.findByEmail(email);
     const phoneExists = await usersRepository.findByPhone(phone);
@@ -43,6 +60,17 @@ class CreateUserService {
       password: hashedPassword,
       phone,
       admin,
+      cnpj,
+      cpf,
+      address,
+      number,
+      complements,
+      district,
+      city,
+      state,
+      country,
+      zip,
+      active,
     });
     await usersRepository.save(user);
     return user;

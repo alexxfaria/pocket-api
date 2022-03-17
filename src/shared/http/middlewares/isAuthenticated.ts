@@ -13,7 +13,7 @@ export default function isAuthenticated(req: Request, res: Response, next: NextF
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    throw new AppError('JWT Token is missing.');
+    throw new AppError('Token não encontrado.');
   }
 
   const [, token] = authHeader.split(' ');
@@ -29,6 +29,6 @@ export default function isAuthenticated(req: Request, res: Response, next: NextF
 
     return next();
   } catch {
-    throw new AppError('Invalid JWT Token.');
+    throw new AppError('Token invalido.');
   }
 }
