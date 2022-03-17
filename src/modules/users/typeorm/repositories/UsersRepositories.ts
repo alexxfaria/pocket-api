@@ -29,5 +29,13 @@ class UsersRepository extends Repository<User> {
     });
     return user;
   }
+  public async findByPhone(phone: string): Promise<User | undefined> {
+    const user = this.findOne({
+      where: {
+        phone,
+      },
+    });
+    return user;
+  }
 }
 export default UsersRepository;

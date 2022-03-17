@@ -43,6 +43,61 @@ export class CreateUsers1642003091281 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'cnpj',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'cpf',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'address',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'number',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'complements',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'district',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'city',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'state',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'country',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'zip',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'active',
+            type: 'boolean',
+            default: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

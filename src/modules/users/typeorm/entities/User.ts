@@ -29,6 +29,39 @@ class User {
   @Column()
   avatar: string;
 
+  @Column()
+  cnpj: string;
+
+  @Column()
+  cpf: string;
+
+  @Column()
+  address: string;
+
+  @Column()
+  number: string;
+
+  @Column()
+  complements: string;
+
+  @Column()
+  district: string;
+
+  @Column()
+  city: string;
+
+  @Column()
+  state: string;
+
+  @Column()
+  country: string;
+
+  @Column()
+  zip: string;
+
+  @Column()
+  active: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
