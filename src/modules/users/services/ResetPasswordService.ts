@@ -18,12 +18,12 @@ class ResetPasswordService {
     const userToken = await usersTokenRepository.findByToken(token);
 
     if (!userToken) {
-      throw new AppError('Token de usuário não existe.');
+      throw new AppError('Token do parceiro não encontrado.');
     }
     const user = await usersRepository.findById(userToken.user_id);
 
     if (!user) {
-      throw new AppError('Usuário não existe.');
+      throw new AppError('Parceiro não encontrado.');
     }
 
     const tokenCreateAt = userToken.created_at;

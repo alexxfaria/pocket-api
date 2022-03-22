@@ -19,7 +19,7 @@ class UpdateProfileService {
     const user = await usersRepository.findOne(user_id);
 
     if (!user) {
-      throw new AppError('Usuário não encontrado.');
+      throw new AppError('Parceiro não encontrado.');
     }
     const usersExists = await usersRepository.findByName(email);
 

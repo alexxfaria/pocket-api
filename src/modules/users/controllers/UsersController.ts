@@ -25,22 +25,91 @@ class UsersController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { name, email, password, phone, admin } = req.body;
+    const {
+      name,
+      email,
+      password,
+      phone,
+      admin,
+      cnpj,
+      cpf,
+      address,
+      number,
+      complements,
+      district,
+      city,
+      state,
+      country,
+      zip,
+      active,
+    } = req.body;
 
     const createUser = new CreateUserService();
 
-    const user = await createUser.execute({ name, email, password, phone, admin });
+    const user = await createUser.execute({
+      name,
+      email,
+      password,
+      phone,
+      admin,
+      cnpj,
+      cpf,
+      address,
+      number,
+      complements,
+      district,
+      city,
+      state,
+      country,
+      zip,
+      active,
+    });
 
     return res.json(user);
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    const { name, email, password, phone, admin } = req.body;
+    const {
+      name,
+      email,
+      password,
+      phone,
+      admin,
+      cnpj,
+      cpf,
+      address,
+      number,
+      complements,
+      district,
+      city,
+      state,
+      country,
+      zip,
+      active,
+    } = req.body;
     const { id } = req.params;
 
     const updateUser = new UpdateUserService();
 
-    const user = await updateUser.execute({ id, name, email, password, phone, admin });
+    const user = await updateUser.execute({
+      id,
+      name,
+      email,
+      password,
+      phone,
+      admin,
+      cnpj,
+      cpf,
+      address,
+      number,
+      complements,
+      district,
+      city,
+      state,
+      country,
+      zip,
+      active,
+    });
 
     return res.json(user);
   }
