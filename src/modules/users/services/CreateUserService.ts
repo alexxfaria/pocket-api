@@ -52,6 +52,7 @@ class CreateUserService {
     if (phoneExists) {
       throw new AppError('Já existe esse telefone cadastrado.');
     }
+
     const hashedPassword = await hash(password, 8);
 
     const user = usersRepository.create({
@@ -72,6 +73,16 @@ class CreateUserService {
       zip,
       active,
     });
+
+    if (!user.name) {
+      throw new AppError('Nome obrigatório.');
+    }
+    if (!user.email) {
+      throw new AppError('Email obrigatório.');
+    }
+    if (!user.phone) {
+      throw new AppError('Telefone obrigatório.');
+    }
     await usersRepository.save(user);
     return user;
   }

@@ -2,8 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import UsersRepository from '../../../modules/users/typeorm/repositories/UsersRepositories';
 import { getCustomRepository } from 'typeorm';
 
-export async function ensureAdmin(request: Request, response: Response, next: NextFunction) {
-  const { user } = request;
+interface IRequest {
+  admin: boolean;
+}
+
+export async function ensureAdmin(req: Request, res: Response, next: NextFunction) {
+  const { user } = req;
 
   const usersRepositories = getCustomRepository(UsersRepository);
 
@@ -15,7 +19,7 @@ export async function ensureAdmin(request: Request, response: Response, next: Ne
     return next();
   }
 
-  return response.status(401).json({
+  return res.status(401).json({
     error: 'Não autorizado',
   });
 }

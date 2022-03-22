@@ -28,10 +28,10 @@ usersRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
-      name: Joi.string().required(),
-      email: Joi.string().email().required(),
+      name: Joi.string(),
+      email: Joi.string().email(),
       password: Joi.string().required(),
-      phone: Joi.string().required(),
+      phone: Joi.string(),
       admin: Joi.boolean(),
       cnpj: Joi.string(),
       cpf: Joi.string(),
@@ -55,7 +55,6 @@ usersRouter.put(
     [Segments.BODY]: {
       name: Joi.string(),
       email: Joi.string().email(),
-      password: Joi.string(),
       phone: Joi.string(),
       admin: Joi.boolean(),
       cnpj: Joi.string(),

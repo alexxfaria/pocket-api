@@ -72,7 +72,6 @@ class UsersController {
     const {
       name,
       email,
-      password,
       phone,
       admin,
       cnpj,
@@ -95,7 +94,6 @@ class UsersController {
       id,
       name,
       email,
-      password,
       phone,
       admin,
       cnpj,

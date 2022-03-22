@@ -8,7 +8,6 @@ interface IRequest {
   id: string;
   name: string;
   email: string;
-  password: string;
   phone: string;
   admin: boolean;
   cnpj: string;
@@ -29,7 +28,6 @@ class UpdateUserService {
     id,
     name,
     email,
-    password,
     phone,
     admin,
     cnpj,
@@ -60,11 +58,8 @@ class UpdateUserService {
       throw new AppError('Telefone já esta sendo utilizado.');
     }
 
-    const hashedPassword = await hash(password, 8);
-
     user.name = name;
     user.email = email;
-    user.password = hashedPassword;
     user.phone = phone;
     user.admin = admin;
     user.cnpj = cnpj;
