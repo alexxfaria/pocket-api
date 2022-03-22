@@ -41,11 +41,7 @@ usersRouter.post(
       district: Joi.string(),
       city: Joi.string(),
       state: Joi.string(),
-<<<<<<< HEAD
       country: Joi.string(),
-=======
-      cuntry: Joi.string(),
->>>>>>> 5f69cbb6d79bce92bd8b9628ff9609f1278e5c69
       zip: Joi.string(),
       active: Joi.boolean(),
     },
@@ -70,11 +66,7 @@ usersRouter.put(
       district: Joi.string(),
       city: Joi.string(),
       state: Joi.string(),
-<<<<<<< HEAD
       country: Joi.string(),
-=======
-      cuntry: Joi.string(),
->>>>>>> 5f69cbb6d79bce92bd8b9628ff9609f1278e5c69
       zip: Joi.string(),
       active: Joi.boolean(),
     },
