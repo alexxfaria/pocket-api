@@ -11,7 +11,7 @@ class DeleteUserService {
     const usersRepository = getCustomRepository(UsersRepository);
     const user = await usersRepository.findOne(id);
     if (!user) {
-      throw new AppError('Usuário não encontrado.');
+      throw new AppError('Parceiro não encontrado.');
     }
 
     await usersRepository.remove(user);

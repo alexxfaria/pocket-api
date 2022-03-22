@@ -45,14 +45,22 @@ class UpdateUserService {
     active,
   }: IRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
-    const user = await usersRepository.findOne(id);
+    const user = await usersRepository.findById(id);
     if (!user) {
       throw new AppError('Parceiro não existe.');
     }
     const usersExists = await usersRepository.findByName(email);
+    const phoneExists = await usersRepository.findByPhone(phone);
 
     if (usersExists && email != user.email) {
+<<<<<<< HEAD
       throw new AppError('Email já esta sendo utilizado.');
+=======
+      throw new AppError('Email ja esta sendo utilizado.');
+    }
+    if (phoneExists && phone != user.phone) {
+      throw new AppError('Telefone ja esta sendo utilizado.');
+>>>>>>> 5f69cbb6d79bce92bd8b9628ff9609f1278e5c69
     }
 
     const hashedPassword = await hash(password, 8);

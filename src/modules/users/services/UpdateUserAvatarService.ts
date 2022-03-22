@@ -18,7 +18,7 @@ class UpdateUserAvatarService {
     const user = await usersRepository.findById(user_id);
 
     if (!user) {
-      throw new AppError('Usuário não encontrado.');
+      throw new AppError('Parceiro não encontrado.');
     }
     if (user.avatar) {
       const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
