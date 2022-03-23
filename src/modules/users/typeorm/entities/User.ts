@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('users')
+@Entity('partners')
 class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -30,10 +30,7 @@ class User {
   avatar: string;
 
   @Column()
-  cnpj: string;
-
-  @Column()
-  cpf: string;
+  cnpj_cpf: string;
 
   @Column()
   address: string;
@@ -58,6 +55,21 @@ class User {
 
   @Column()
   zip: string;
+
+  @Column()
+  contact: string;
+
+  @Column()
+  landline: string;
+
+  @Column()
+  id_plan: string;
+
+  @Column()
+  stop_ads: boolean;
+
+  @Column()
+  all_ads: boolean;
 
   @Column()
   active: boolean;

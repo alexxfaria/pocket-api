@@ -1,5 +1,4 @@
 import AppError from '@shared/errors/AppError';
-import { hash } from 'bcryptjs';
 import { getCustomRepository } from 'typeorm';
 import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepositories';
@@ -10,8 +9,7 @@ interface IRequest {
   email: string;
   phone: string;
   admin: boolean;
-  cnpj: string;
-  cpf: string;
+  cnpj_cpf: string;
   address: string;
   number: string;
   complements: string;
@@ -20,6 +18,10 @@ interface IRequest {
   state: string;
   country: string;
   zip: string;
+  contact: string;
+  landline: string;
+  stop_ads: boolean;
+  all_ads: boolean;
   active: boolean;
 }
 
@@ -30,8 +32,7 @@ class UpdateUserService {
     email,
     phone,
     admin,
-    cnpj,
-    cpf,
+    cnpj_cpf,
     address,
     number,
     complements,
@@ -40,6 +41,10 @@ class UpdateUserService {
     state,
     country,
     zip,
+    contact,
+    landline,
+    stop_ads,
+    all_ads,
     active,
   }: IRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
@@ -62,8 +67,7 @@ class UpdateUserService {
     user.email = email;
     user.phone = phone;
     user.admin = admin;
-    user.cnpj = cnpj;
-    user.cpf = cpf;
+    user.cnpj_cpf = cnpj_cpf;
     user.address = address;
     user.number = number;
     user.complements = complements;
@@ -72,6 +76,10 @@ class UpdateUserService {
     user.state = state;
     user.country = country;
     user.zip = zip;
+    user.contact = contact;
+    user.landline = landline;
+    user.stop_ads = stop_ads;
+    user.all_ads = all_ads;
     user.active = active;
 
     await usersRepository.save(user);

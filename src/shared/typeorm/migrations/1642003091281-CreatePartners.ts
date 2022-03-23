@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateUsers1642003091281 implements MigrationInterface {
+export class CreatePartners1642003091281 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'partners',
         columns: [
           {
             name: 'id',
@@ -43,12 +43,7 @@ export class CreateUsers1642003091281 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'cnpj',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'cpf',
+            name: 'cnpj_cpf',
             type: 'varchar',
             isNullable: true,
           },
@@ -93,6 +88,31 @@ export class CreateUsers1642003091281 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'contact',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'landline',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'id_plan',
+            type: 'uuid',
+            isNullable: true,
+          },
+          {
+            name: 'stop_ads',
+            type: 'boolean',
+            default: false,
+          },
+          {
+            name: 'all_ads',
+            type: 'boolean',
+            default: true,
+          },
+          {
             name: 'active',
             type: 'boolean',
             default: true,
@@ -113,6 +133,6 @@ export class CreateUsers1642003091281 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable('partners');
   }
 }

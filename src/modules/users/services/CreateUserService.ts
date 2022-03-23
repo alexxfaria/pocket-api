@@ -10,8 +10,7 @@ interface IRequest {
   password: string;
   phone: string;
   admin: boolean;
-  cnpj: string;
-  cpf: string;
+  cnpj_cpf: string;
   address: string;
   number: string;
   complements: string;
@@ -20,6 +19,10 @@ interface IRequest {
   state: string;
   country: string;
   zip: string;
+  contact: string;
+  landline: string;
+  stop_ads: boolean;
+  all_ads: boolean;
   active: boolean;
 }
 
@@ -30,8 +33,7 @@ class CreateUserService {
     password,
     phone,
     admin,
-    cnpj,
-    cpf,
+    cnpj_cpf,
     address,
     number,
     complements,
@@ -40,6 +42,10 @@ class CreateUserService {
     state,
     country,
     zip,
+    contact,
+    landline,
+    stop_ads,
+    all_ads,
     active,
   }: IRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
@@ -61,8 +67,7 @@ class CreateUserService {
       password: hashedPassword,
       phone,
       admin,
-      cnpj,
-      cpf,
+      cnpj_cpf,
       address,
       number,
       complements,
@@ -71,6 +76,10 @@ class CreateUserService {
       state,
       country,
       zip,
+      contact,
+      landline,
+      stop_ads,
+      all_ads,
       active,
     });
 
@@ -83,7 +92,7 @@ class CreateUserService {
     if (!user.phone) {
       throw new AppError('Telefone é obrigatório.');
     }
-    if (!user.cnpj && !user.cpf) {
+    if (!user.cnpj_cpf) {
       throw new AppError('CNPJ ou CPF é obrigatório.');
     }
     await usersRepository.save(user);

@@ -31,8 +31,7 @@ class UsersController {
       password,
       phone,
       admin,
-      cnpj,
-      cpf,
+      cnpj_cpf,
       address,
       number,
       complements,
@@ -41,6 +40,10 @@ class UsersController {
       state,
       country,
       zip,
+      contact,
+      landline,
+      stop_ads,
+      all_ads,
       active,
     } = req.body;
 
@@ -52,8 +55,7 @@ class UsersController {
       password,
       phone,
       admin,
-      cnpj,
-      cpf,
+      cnpj_cpf,
       address,
       number,
       complements,
@@ -62,6 +64,10 @@ class UsersController {
       state,
       country,
       zip,
+      contact,
+      landline,
+      stop_ads,
+      all_ads,
       active,
     });
 
@@ -74,8 +80,7 @@ class UsersController {
       email,
       phone,
       admin,
-      cnpj,
-      cpf,
+      cnpj_cpf,
       address,
       number,
       complements,
@@ -84,6 +89,10 @@ class UsersController {
       state,
       country,
       zip,
+      contact,
+      landline,
+      stop_ads,
+      all_ads,
       active,
     } = req.body;
     const { id } = req.params;
@@ -96,8 +105,7 @@ class UsersController {
       email,
       phone,
       admin,
-      cnpj,
-      cpf,
+      cnpj_cpf,
       address,
       number,
       complements,
@@ -106,6 +114,10 @@ class UsersController {
       state,
       country,
       zip,
+      contact,
+      landline,
+      stop_ads,
+      all_ads,
       active,
     });
 
