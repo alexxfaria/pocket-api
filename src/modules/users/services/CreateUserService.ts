@@ -75,13 +75,16 @@ class CreateUserService {
     });
 
     if (!user.name) {
-      throw new AppError('Nome obrigatório.');
+      throw new AppError('Nome é obrigatório.');
     }
     if (!user.email) {
-      throw new AppError('Email obrigatório.');
+      throw new AppError('Email é obrigatório.');
     }
     if (!user.phone) {
-      throw new AppError('Telefone obrigatório.');
+      throw new AppError('Telefone é obrigatório.');
+    }
+    if (!user.cnpj && !user.cpf) {
+      throw new AppError('CNPJ ou CPF é obrigatório.');
     }
     await usersRepository.save(user);
     return user;
