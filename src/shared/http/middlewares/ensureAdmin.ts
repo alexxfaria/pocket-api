@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import UsersRepository from '../../../modules/users/typeorm/repositories/UsersRepositories';
+import UsersRepository from '../../../modules/partners/typeorm/repositories/UsersRepositories';
 import { getCustomRepository } from 'typeorm';
 
 export async function ensureAdmin(req: Request, res: Response, next: NextFunction) {
