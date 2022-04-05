@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Ads from '../typeorm/entities/ads';
+import Ads from '../typeorm/entities/Ads';
 import AdsRepository from '../typeorm/repositories/AdsRepository';
 
 interface IRequest {
