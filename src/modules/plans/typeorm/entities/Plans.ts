@@ -1,23 +1,29 @@
-import { CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('plans')
 class Plans {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @CreateDateColumn()
+  @Column()
   name: string;
 
-  @CreateDateColumn()
+  @Column()
   photos: number;
 
-  @CreateDateColumn('decimal')
+  @Column('decimal')
   price: number;
 
   @CreateDateColumn()
   time: Date;
 
-  @CreateDateColumn()
+  @Column()
   active: string;
 
   @CreateDateColumn()

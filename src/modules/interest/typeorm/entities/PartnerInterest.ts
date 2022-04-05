@@ -1,17 +1,23 @@
-import { CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('partner_interest')
 class PartnerInterest {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @CreateDateColumn()
+  @Column()
   id_partners: string;
 
-  @CreateDateColumn()
+  @Column()
   id_interest: string;
 
-  @CreateDateColumn()
+  @Column()
   active: string;
 
   @CreateDateColumn()

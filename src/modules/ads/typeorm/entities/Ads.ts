@@ -38,10 +38,10 @@ class Ads {
   @CreateDateColumn()
   validity_check: Date;
 
-  @CreateDateColumn()
+  @Column()
   id_partner: string;
 
-  @CreateDateColumn()
+  @Column()
   active: string;
 
   @CreateDateColumn()
