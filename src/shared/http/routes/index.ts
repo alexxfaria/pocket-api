@@ -9,6 +9,7 @@ import ordersRouter from '@modules/orders/routes/orders.routes';
 import adsRouter from '@modules/ads/routes/ads.routes';
 import partnerInterestRouter from '@modules/interest/routes/partnersInterest.routes';
 import interestRouter from '@modules/interest/routes/interest.routes';
+import plansRouter from '@modules/plans/routes/plans.routes';
 
 const routes = Router();
 
@@ -16,6 +17,7 @@ routes.use('/products', productsRouter);
 routes.use('/partners', usersRouter);
 routes.use('/partners_interest', partnerInterestRouter);
 routes.use('/interest', interestRouter);
+routes.use('/plans', plansRouter);
 routes.use('/sessions', sessionsRouter);
 routes.use('/password', passwordRouter);
 routes.use('/profile', profileRouter);
