@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import CreateAdsService from '../services/CreateAdsService';
+import DeleteAdsService from '../services/DeleteAdsService';
 import UpdateAdsService from '../services/UpdateAdsService';
 
 class AdsController {
@@ -66,6 +67,15 @@ class AdsController {
       active,
     });
     return res.json(ads);
+  }
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const deleteAds = new DeleteAdsService();
+
+    await deleteAds.execute({ id });
+
+    return res.json([]);
   }
 }
 export default AdsController;

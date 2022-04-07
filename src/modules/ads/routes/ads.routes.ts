@@ -46,4 +46,11 @@ adsRouter.put(
   }),
   adsController.update,
 );
+adsRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: { id: Joi.string().uuid().required() },
+  }),
+  adsController.delete,
+);
 export default adsRouter;
