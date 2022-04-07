@@ -15,7 +15,7 @@ class Interest {
   name: string;
 
   @Column()
-  active: string;
+  active: boolean;
 
   @CreateDateColumn()
   created_at: Date;

@@ -24,7 +24,7 @@ class Plans {
   time: Date;
 
   @Column()
-  active: string;
+  active: boolean;
 
   @CreateDateColumn()
   created_at: Date;

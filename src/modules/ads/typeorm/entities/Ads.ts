@@ -42,7 +42,7 @@ class Ads {
   id_partner: string;
 
   @Column()
-  active: string;
+  active: boolean;
 
   @CreateDateColumn()
   created_at: Date;

@@ -18,7 +18,7 @@ class InterestAds {
   id_ads: string;
 
   @Column()
-  active: string;
+  active: boolean;
 
   @CreateDateColumn()
   created_at: Date;
