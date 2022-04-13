@@ -2,22 +2,23 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Generated,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('partners_tokens')
-class UserToken {
+@Entity('photos_ads')
+class PhotoAds {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  @Generated('uuid')
-  token: string;
+  photo: string;
 
   @Column()
-  user_id: string;
+  id_ads: string;
+
+  @Column()
+  active: boolean;
 
   @CreateDateColumn()
   created_at: Date;
@@ -25,4 +26,4 @@ class UserToken {
   @UpdateDateColumn()
   updated_at: Date;
 }
-export default UserToken;
+export default PhotoAds;

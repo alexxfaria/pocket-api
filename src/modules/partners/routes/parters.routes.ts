@@ -1,20 +1,20 @@
 import { Router } from 'express';
-import UserController from '../controllers/UsersController';
+import PartnersController from '../controllers/PartnersController';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
 import { celebrate, Joi, Segments } from 'celebrate';
 import isAuthenticated from '../../../shared/http/middlewares/isAuthenticated';
-import UserAvatarController from '../controllers/UsersAvatarController';
+import PartnersAvatarController from '../controllers/PartnersAvatarController';
 import { ensureAdmin } from '../../../shared/http/middlewares/ensureAdmin';
 
-const usersRouter = Router();
-const usersController = new UserController();
-const usersAvatarController = new UserAvatarController();
+const partnersRouter = Router();
+const partnersController = new PartnersController();
+const partnersAvatarController = new PartnersAvatarController();
 const upload = multer(uploadConfig);
 
-usersRouter.get('/', isAuthenticated, ensureAdmin, usersController.index);
+partnersRouter.get('/', isAuthenticated, ensureAdmin, partnersController.index);
 
-usersRouter.get(
+partnersRouter.get(
   '/:id',
   isAuthenticated,
   celebrate({
@@ -22,9 +22,9 @@ usersRouter.get(
       id: Joi.string().uuid().required(),
     },
   }),
-  usersController.show,
+  partnersController.show,
 );
-usersRouter.post(
+partnersRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
@@ -49,9 +49,9 @@ usersRouter.post(
       active: Joi.boolean(),
     },
   }),
-  usersController.create,
+  partnersController.create,
 );
-usersRouter.put(
+partnersRouter.put(
   '/:id',
   isAuthenticated,
   celebrate({
@@ -78,21 +78,21 @@ usersRouter.put(
     },
     [Segments.PARAMS]: { id: Joi.string().uuid().required() },
   }),
-  usersController.update,
+  partnersController.update,
 );
-usersRouter.delete(
+partnersRouter.delete(
   '/:id',
   isAuthenticated,
   celebrate({
     [Segments.PARAMS]: { id: Joi.string().uuid().required() },
   }),
-  usersController.delete,
+  partnersController.delete,
 );
-usersRouter.patch(
+partnersRouter.patch(
   '/avatar',
   isAuthenticated,
   upload.single('avatar'),
-  usersAvatarController.update,
+  partnersAvatarController.update,
 );
 
-export default usersRouter;
+export default partnersRouter;

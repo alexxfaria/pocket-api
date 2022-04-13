@@ -1,8 +1,8 @@
 import AppError from '@shared/errors/AppError';
 import { hash } from 'bcryptjs';
 import { getCustomRepository } from 'typeorm';
-import User from '../typeorm/entities/User';
-import UsersRepository from '../typeorm/repositories/UsersRepositories';
+import Partners from '../typeorm/entities/Partners';
+import PartnersRepositories from '../typeorm/repositories/PartnersRepositories';
 
 interface IRequest {
   name: string;
@@ -26,7 +26,7 @@ interface IRequest {
   active: boolean;
 }
 
-class CreateUserService {
+class CreatePartnersService {
   public async execute({
     name,
     email,
@@ -47,10 +47,10 @@ class CreateUserService {
     stop_ads,
     all_ads,
     active,
-  }: IRequest): Promise<User> {
-    const usersRepository = getCustomRepository(UsersRepository);
-    const emailExists = await usersRepository.findByEmail(email);
-    const phoneExists = await usersRepository.findByPhone(phone);
+  }: IRequest): Promise<Partners> {
+    const partnersRepository = getCustomRepository(PartnersRepositories);
+    const emailExists = await partnersRepository.findByEmail(email);
+    const phoneExists = await partnersRepository.findByPhone(phone);
 
     if (emailExists) {
       throw new AppError('Já existe esse e-mail cadastrado.');
@@ -61,7 +61,7 @@ class CreateUserService {
 
     const hashedPassword = await hash(password, 8);
 
-    const user = usersRepository.create({
+    const partners = partnersRepository.create({
       name,
       email,
       password: hashedPassword,
@@ -83,20 +83,20 @@ class CreateUserService {
       active,
     });
 
-    if (!user.name) {
+    if (!partners.name) {
       throw new AppError('Nome é obrigatório.');
     }
-    if (!user.email) {
+    if (!partners.email) {
       throw new AppError('Email é obrigatório.');
     }
-    if (!user.phone) {
+    if (!partners.phone) {
       throw new AppError('Telefone é obrigatório.');
     }
-    if (!user.cnpj_cpf) {
+    if (!partners.cnpj_cpf) {
       throw new AppError('CNPJ ou CPF é obrigatório.');
     }
-    await usersRepository.save(user);
-    return user;
+    await partnersRepository.save(partners);
+    return partners;
   }
 }
-export default CreateUserService;
+export default CreatePartnersService;

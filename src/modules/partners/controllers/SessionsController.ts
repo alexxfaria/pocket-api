@@ -7,9 +7,9 @@ class SessionsController {
 
     const createSession = new CreateSessionService();
 
-    const user = await createSession.execute({ email, password });
+    const partners = await createSession.execute({ email, password });
 
-    return res.json(user);
+    return res.json(partners);
   }
 }
 export default SessionsController;

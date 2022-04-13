@@ -8,6 +8,7 @@ const adsRouter = Router();
 const adsController = new AdsController();
 
 adsRouter.use(isAuthenticated);
+adsRouter.get('/', adsController.index);
 adsRouter.post(
   '/',
   celebrate({
@@ -45,6 +46,15 @@ adsRouter.put(
     [Segments.PARAMS]: { id: Joi.string().uuid().required() },
   }),
   adsController.update,
+);
+adsRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  adsController.show,
 );
 adsRouter.delete(
   '/:id',

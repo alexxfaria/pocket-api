@@ -1,3 +1,4 @@
+import PartnersRepositories from '@modules/partners/typeorm/repositories/PartnersRepositories';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import Ads from '../typeorm/entities/Ads';
@@ -15,6 +16,7 @@ interface IRequest {
   validity_check: Date;
   id_partner: string;
 }
+
 class CreateAdsService {
   public async execute({
     description,
@@ -29,11 +31,13 @@ class CreateAdsService {
     id_partner,
   }: IRequest): Promise<Ads> {
     const adsRepository = getCustomRepository(AdsRepository);
-    // const adsExists = await adsRepository.findByDesc(description);
+    const partnersRepository = getCustomRepository(PartnersRepositories);
 
-    // if (adsExists) {
-    //   throw new AppError('Ja existe um anuncio com a mesma descrição.');
-    // }
+    const partnersExists = await partnersRepository.findById(id_partner);
+    if (!partnersExists) {
+      throw new AppError(`Parceiro ${id_partner}não encontrado.`);
+    }
+
     const ads = adsRepository.create({
       description,
       color,
@@ -46,6 +50,7 @@ class CreateAdsService {
       validity_check,
       id_partner,
     });
+
     await adsRepository.save(ads);
     return ads;
   }

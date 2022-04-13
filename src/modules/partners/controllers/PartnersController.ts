@@ -1,27 +1,27 @@
 import { Request, Response } from 'express';
-import CreateUserService from '../services/CreateUserService';
-import DeleteUserService from '../services/DeleteUserService';
-import ListUserService from '../services/ListUserService';
-import ShowUserService from '../services/ShowUserService';
-import UpdateUserService from '../services/UpdateUserService';
+import CreatePartnersService from '../services/CreatePartnersService';
+import DeletePartnersService from '../services/DeletePartnersService';
+import ListPartnersService from '../services/ListPartnersService';
+import ShowPartnersService from '../services/ShowPartnersService';
+import UpdatePartnersService from '../services/UpdatePartnersService';
 
-class UsersController {
+class PartnersController {
   public async index(req: Request, res: Response): Promise<Response> {
-    const listUser = new ListUserService();
+    const listPartners = new ListPartnersService();
 
-    const users = await listUser.execute();
+    const partners = await listPartners.execute();
 
-    return res.json(users);
+    return res.json(partners);
   }
 
   public async show(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
-    const showUser = new ShowUserService();
+    const showPartners = new ShowPartnersService();
 
-    const user = await showUser.execute({ id });
+    const partners = await showPartners.execute({ id });
 
-    return res.json(user);
+    return res.json(partners);
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
@@ -47,9 +47,9 @@ class UsersController {
       active,
     } = req.body;
 
-    const createUser = new CreateUserService();
+    const createPartners = new CreatePartnersService();
 
-    const user = await createUser.execute({
+    const partners = await createPartners.execute({
       name,
       email,
       password,
@@ -71,7 +71,7 @@ class UsersController {
       active,
     });
 
-    return res.json(user);
+    return res.json(partners);
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
@@ -97,9 +97,9 @@ class UsersController {
     } = req.body;
     const { id } = req.params;
 
-    const updateUser = new UpdateUserService();
+    const updatePartners = new UpdatePartnersService();
 
-    const user = await updateUser.execute({
+    const partners = await updatePartners.execute({
       id,
       name,
       email,
@@ -121,17 +121,17 @@ class UsersController {
       active,
     });
 
-    return res.json(user);
+    return res.json(partners);
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
-    const deleteUser = new DeleteUserService();
+    const deletePartners = new DeletePartnersService();
 
-    await deleteUser.execute({ id });
+    await deletePartners.execute({ id });
 
     return res.json([]);
   }
 }
-export default UsersController;
+export default PartnersController;

@@ -1,9 +1,9 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
-import UsersTokenRepository from '../typeorm/repositories/UsersTokenRepository';
+import PartnersTokenRepository from '../typeorm/repositories/PartnersTokenRepository';
 import { isAfter, addHours } from 'date-fns';
-import UsersRepository from '../typeorm/repositories/UsersRepositories';
+import PartnersRepositories from '../typeorm/repositories/PartnersRepositories';
 
 interface IRequest {
   token: string;
@@ -12,30 +12,30 @@ interface IRequest {
 
 class ResetPasswordService {
   public async execute({ token, password }: IRequest): Promise<void> {
-    const usersRepository = getCustomRepository(UsersRepository);
-    const usersTokenRepository = getCustomRepository(UsersTokenRepository);
+    const partnersRepositories = getCustomRepository(PartnersRepositories);
+    const partnersTokenRepository = getCustomRepository(PartnersTokenRepository);
 
-    const userToken = await usersTokenRepository.findByToken(token);
+    const partnersToken = await partnersTokenRepository.findByToken(token);
 
-    if (!userToken) {
+    if (!partnersToken) {
       throw new AppError('Token do parceiro não encontrado.');
     }
-    const user = await usersRepository.findById(userToken.user_id);
+    const partners = await partnersRepositories.findById(partnersToken.user_id);
 
-    if (!user) {
+    if (!partners) {
       throw new AppError('Parceiro não encontrado.');
     }
 
-    const tokenCreateAt = userToken.created_at;
+    const tokenCreateAt = partnersToken.created_at;
     const compareDate = addHours(tokenCreateAt, 2);
 
     if (isAfter(Date.now(), compareDate)) {
       throw new AppError('Token expirado');
     }
     const hashedPassword = await hash(password, 8);
-    user.password = hashedPassword;
+    partners.password = hashedPassword;
 
-    await usersRepository.save(user);
+    await partnersRepositories.save(partners);
   }
 }
 export default ResetPasswordService;

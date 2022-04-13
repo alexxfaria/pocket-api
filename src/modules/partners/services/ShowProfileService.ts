@@ -1,20 +1,20 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import User from '../typeorm/entities/User';
-import UsersRepository from '../typeorm/repositories/UsersRepositories';
+import Partners from '../typeorm/entities/Partners';
+import PartnersRepositories from '../typeorm/repositories/PartnersRepositories';
 
 interface IRequest {
   user_id: string;
 }
 
 class ShowProfileService {
-  public async execute({ user_id }: IRequest): Promise<User> {
-    const usersRepository = getCustomRepository(UsersRepository);
-    const user = await usersRepository.findById(user_id);
-    if (!user) {
+  public async execute({ user_id }: IRequest): Promise<Partners> {
+    const partnersRepositories = getCustomRepository(PartnersRepositories);
+    const partners = await partnersRepositories.findById(user_id);
+    if (!partners) {
       throw new AppError('Parceiro não encontrado');
     }
-    return user;
+    return partners;
   }
 }
 export default ShowProfileService;

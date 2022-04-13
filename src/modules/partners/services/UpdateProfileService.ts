@@ -1,8 +1,8 @@
 import AppError from '@shared/errors/AppError';
 import { compare, hash } from 'bcryptjs';
 import { getCustomRepository } from 'typeorm';
-import User from '../typeorm/entities/User';
-import UsersRepository from '../typeorm/repositories/UsersRepositories';
+import Partners from '../typeorm/entities/Partners';
+import PartnersRepositories from '../typeorm/repositories/PartnersRepositories';
 
 interface IRequest {
   user_id: string;
@@ -13,21 +13,27 @@ interface IRequest {
 }
 
 class UpdateProfileService {
-  public async execute({ user_id, name, email, password, old_password }: IRequest): Promise<User> {
-    const usersRepository = getCustomRepository(UsersRepository);
+  public async execute({
+    user_id,
+    name,
+    email,
+    password,
+    old_password,
+  }: IRequest): Promise<Partners> {
+    const partnersRepository = getCustomRepository(PartnersRepositories);
 
-    const user = await usersRepository.findOne(user_id);
+    const partners = await partnersRepository.findOne(user_id);
 
-    if (!user) {
+    if (!partners) {
       throw new AppError('Parceiro não encontrado.');
     }
-    const usersExists = await usersRepository.findByName(email);
+    const partnersExists = await partnersRepository.findByName(email);
 
-    if (usersExists && usersExists.id != user_id) {
+    if (partnersExists && partnersExists.id != user_id) {
       throw new AppError('Esse e-mail ja está cadastrado.');
     }
 
-    if (usersExists && email != user.email) {
+    if (partnersExists && email != partners.email) {
       throw new AppError('Email address already used.');
     }
 
@@ -36,19 +42,19 @@ class UpdateProfileService {
     }
 
     if (password && old_password) {
-      const checkOldPassword = await compare(old_password, user.password);
+      const checkOldPassword = await compare(old_password, partners.password);
 
       if (!checkOldPassword) {
         throw new AppError('Senha antiga não confere.');
       }
-      user.password = await hash(password, 8);
+      partners.password = await hash(password, 8);
     }
 
-    user.name = name;
-    user.email = email;
+    partners.name = name;
+    partners.email = email;
 
-    await usersRepository.save(user);
-    return user;
+    await partnersRepository.save(partners);
+    return partners;
   }
 }
 export default UpdateProfileService;

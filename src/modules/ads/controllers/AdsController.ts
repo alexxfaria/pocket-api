@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import CreateAdsService from '../services/CreateAdsService';
 import DeleteAdsService from '../services/DeleteAdsService';
+import ListAdsService from '../services/ListAdsService';
+import ShowAdsService from '../services/ShowAdsService';
 import UpdateAdsService from '../services/UpdateAdsService';
 
 class AdsController {
@@ -66,6 +68,22 @@ class AdsController {
       id_partner,
       active,
     });
+    return res.json(ads);
+  }
+  public async index(req: Request, res: Response): Promise<Response> {
+    const listAds = new ListAdsService();
+
+    const ads = await listAds.execute();
+
+    return res.json(ads);
+  }
+  public async show(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const showAds = new ShowAdsService();
+
+    const ads = await showAds.execute({ id });
+
     return res.json(ads);
   }
   public async delete(req: Request, res: Response): Promise<Response> {
