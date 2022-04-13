@@ -1,6 +1,7 @@
+import Partners from '@modules/partners/typeorm/entities/Partners';
 import PartnersRepositories from '@modules/partners/typeorm/repositories/PartnersRepositories';
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
+import { getCustomRepository, Repository } from 'typeorm';
 import Ads from '../typeorm/entities/Ads';
 import AdsRepository from '../typeorm/repositories/AdsRepository';
 
@@ -32,12 +33,6 @@ class CreateAdsService {
   }: IRequest): Promise<Ads> {
     const adsRepository = getCustomRepository(AdsRepository);
     const partnersRepository = getCustomRepository(PartnersRepositories);
-
-    const partnersExists = await partnersRepository.findById(id_partner);
-    if (!partnersExists) {
-      throw new AppError(`Parceiro ${id_partner}não encontrado.`);
-    }
-
     const ads = adsRepository.create({
       description,
       color,
@@ -50,6 +45,11 @@ class CreateAdsService {
       validity_check,
       id_partner,
     });
+    const { id } = await partnersRepository.findById(id_partner);
+    if (!id) {
+      throw new AppError('Parceiro não encontrado.');
+    }
+    console.log(id);
 
     await adsRepository.save(ads);
     return ads;
