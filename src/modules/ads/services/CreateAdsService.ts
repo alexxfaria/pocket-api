@@ -49,7 +49,9 @@ class CreateAdsService {
     if (!partners?.id) {
       throw new AppError('Parceiro não encontrado.');
     }
-
+    if (!partners?.active) {
+      throw new AppError('Parceiro esta inativo.');
+    }
     await adsRepository.save(ads);
     return ads;
   }

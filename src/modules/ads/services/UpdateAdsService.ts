@@ -1,3 +1,4 @@
+import PartnersRepositories from '@modules/partners/typeorm/repositories/PartnersRepositories';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import Ads from '../typeorm/entities/Ads';
@@ -33,9 +34,19 @@ class UpdateAdsService {
     active,
   }: IRequest): Promise<Ads> {
     const adsRepository = getCustomRepository(AdsRepository);
+    const partnersRepository = getCustomRepository(PartnersRepositories);
+
     const ads = await adsRepository.findById(id);
     if (!ads) {
       throw new AppError('Anuncio não existe');
+    }
+
+    const partners = await partnersRepository.findById(id_partner);
+    if (!partners?.id) {
+      throw new AppError('Parceiro não encontrado.');
+    }
+    if (!partners?.active) {
+      throw new AppError('Parceiro esta inativo.');
     }
 
     ads.description = description;
