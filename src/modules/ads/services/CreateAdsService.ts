@@ -45,11 +45,10 @@ class CreateAdsService {
       validity_check,
       id_partner,
     });
-    const { id } = await partnersRepository.findById(id_partner);
-    if (!id) {
+    const partners = await partnersRepository.findById(id_partner);
+    if (!partners?.id) {
       throw new AppError('Parceiro não encontrado.');
     }
-    console.log(id);
 
     await adsRepository.save(ads);
     return ads;

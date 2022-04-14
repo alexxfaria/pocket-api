@@ -28,10 +28,11 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   }
   return res.status(500).json({
     status: 'error',
-    message: 'Internal Server Error',
+    message: 'Erro no servidor interno',
+    appError: error.message,
   });
 });
 
 app.listen(3333, () => {
-  console.log('Server in running port localhost:3333');
+  console.log('Servidor em execução no ip: localhost:3333');
 });

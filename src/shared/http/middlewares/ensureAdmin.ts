@@ -7,11 +7,11 @@ export async function ensureAdmin(req: Request, res: Response, next: NextFunctio
 
   const partnersRepositories = getCustomRepository(PartnersRepositories);
 
-  const { admin } = await partnersRepositories.findOne(partners);
+  const partnersAdmin = await partnersRepositories.findOne(partners);
 
   // Verificar se usuario admin
 
-  if (admin) {
+  if (partnersAdmin?.admin) {
     return next();
   }
 
