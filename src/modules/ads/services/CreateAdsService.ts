@@ -1,7 +1,6 @@
-import Partners from '@modules/partners/typeorm/entities/Partners';
 import PartnersRepositories from '@modules/partners/typeorm/repositories/PartnersRepositories';
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository, Repository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 import Ads from '../typeorm/entities/Ads';
 import AdsRepository from '../typeorm/repositories/AdsRepository';
 

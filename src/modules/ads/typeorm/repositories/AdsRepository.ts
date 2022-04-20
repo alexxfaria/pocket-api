@@ -11,14 +11,7 @@ class AdsRepository extends Repository<Ads> {
     });
     return ads;
   }
-  public async findByPartnersId(id_partner: string): Promise<Ads | undefined> {
-    const ads = this.findOne({
-      where: {
-        id_partner,
-      },
-    });
-    return ads;
-  }
+
   public async findByDesc(description: string): Promise<Ads | undefined> {
     const ads = this.findOne({
       where: {

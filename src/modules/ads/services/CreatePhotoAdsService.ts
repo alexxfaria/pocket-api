@@ -1,6 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import PhotoAds from '../typeorm/entities/PhotoAds';
+import AdsRepository from '../typeorm/repositories/AdsRepository';
 import PhotoAdsRepository from '../typeorm/repositories/PhotoAdsRepository';
 
 interface IRequest {
@@ -10,15 +11,17 @@ interface IRequest {
 class CreatePhotoAdsService {
   public async execute({ photo, id_ads }: IRequest): Promise<PhotoAds> {
     const photoAdsRepository = getCustomRepository(PhotoAdsRepository);
-    // const adsExists = await adsRepository.findByDesc(description);
+    const adsRepository = getCustomRepository(AdsRepository);
 
-    // if (adsExists) {
-    //   throw new AppError('Ja existe um anuncio com a mesma descrição.');
-    // }
     const photoAds = photoAdsRepository.create({
       photo,
       id_ads,
     });
+
+    const ads = await adsRepository.findById(id_ads);
+    if (!ads?.id) {
+      throw new AppError('Anúncio não encontrado.');
+    }
     await photoAdsRepository.save(photoAds);
     return photoAds;
   }

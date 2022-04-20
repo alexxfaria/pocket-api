@@ -11,7 +11,7 @@ class DeletePhotoAdsService {
     const photoAdsRepository = getCustomRepository(PhotoAdsRepository);
     const photoAds = await photoAdsRepository.findOne(id);
     if (!photoAds) {
-      throw new AppError('Anúncio não encontrado.');
+      throw new AppError('Imagem não encontrado.');
     }
 
     await photoAdsRepository.remove(photoAds);

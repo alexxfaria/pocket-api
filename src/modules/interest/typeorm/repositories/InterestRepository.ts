@@ -11,5 +11,13 @@ class InterestRepository extends Repository<Interest> {
     });
     return interest;
   }
+  public async findByName(name: string): Promise<Interest | undefined> {
+    const interest = this.findOne({
+      where: {
+        name,
+      },
+    });
+    return interest;
+  }
 }
 export default InterestRepository;
