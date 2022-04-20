@@ -17,4 +17,12 @@ interestRouter.post(
   }),
   interestController.create,
 );
+interestRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: { id: Joi.string().uuid().required() },
+  }),
+  interestController.delete,
+);
+
 export default interestRouter;

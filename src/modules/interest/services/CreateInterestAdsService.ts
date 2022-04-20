@@ -24,9 +24,16 @@ class CreateInterestAdsService {
     if (!ads?.id) {
       throw new AppError('Anúncio não encontrado.');
     }
+    if (!ads?.active) {
+      throw new AppError(`Anúncio ${ads.description} - ${ads.id}  esta inativo.`);
+    }
+
     const interest = await interestRepository.findById(id_interest);
     if (!interest?.id) {
       throw new AppError('Interesse não encontrado.');
+    }
+    if (!interest?.active) {
+      throw new AppError(`Interesse ${interest.name} esta inativo.`);
     }
     await interestAdsRepository.save(interestAds);
     return interestAds;

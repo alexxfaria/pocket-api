@@ -6,6 +6,7 @@ import { celebrate, Joi, Segments } from 'celebrate';
 import isAuthenticated from '../../../shared/http/middlewares/isAuthenticated';
 import PartnersAvatarController from '../controllers/PartnersAvatarController';
 import { ensureAdmin } from '../../../shared/http/middlewares/ensureAdmin';
+import { string } from 'joi';
 
 const partnersRouter = Router();
 const partnersController = new PartnersController();
@@ -44,6 +45,7 @@ partnersRouter.post(
       zip: Joi.string(),
       contact: Joi.string(),
       landline: Joi.string(),
+      id_plan: Joi.string(),
       stop_ads: Joi.boolean(),
       all_ads: Joi.boolean(),
       active: Joi.boolean(),
@@ -72,6 +74,7 @@ partnersRouter.put(
       zip: Joi.string(),
       contact: Joi.string(),
       landline: Joi.string(),
+      id_plan: Joi.string(),
       stop_ads: Joi.boolean(),
       all_ads: Joi.boolean(),
       active: Joi.boolean(),

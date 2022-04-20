@@ -18,10 +18,6 @@ class UpdatePhotoAdsService {
     if (!photoAds) {
       throw new AppError('Foto não existe');
     }
-    const ads = await adsRepository.findById(id_ads);
-    if (!ads) {
-      throw new AppError('Anuncio não existe');
-    }
 
     photoAds.photo = photo;
     photoAds.id_ads = id_ads;

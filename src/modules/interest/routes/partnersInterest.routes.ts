@@ -18,4 +18,11 @@ partnerInterestRouter.post(
   }),
   partnerInterestController.create,
 );
+partnerInterestRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: { id: Joi.string().uuid().required() },
+  }),
+  partnerInterestController.delete,
+);
 export default partnerInterestRouter;

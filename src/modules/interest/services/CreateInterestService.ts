@@ -12,7 +12,7 @@ class CreateInterestService {
     const interestRepository = getCustomRepository(InterestRepository);
     const inter = await interestRepository.findByName(name);
     if (inter) {
-      throw new AppError('Ja existe este interesse cadastrado.');
+      throw new AppError('Já existe este interesse cadastrado.');
     }
     const interest = interestRepository.create({
       name,

@@ -22,6 +22,9 @@ class CreatePhotoAdsService {
     if (!ads?.id) {
       throw new AppError('Anúncio não encontrado.');
     }
+    if (!ads?.active) {
+      throw new AppError('Anúncio esta inativo.');
+    }
     await photoAdsRepository.save(photoAds);
     return photoAds;
   }

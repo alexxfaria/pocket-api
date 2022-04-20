@@ -1,3 +1,4 @@
+import PlansRepository from '@modules/plans/typeorm/repositories/PlansRepository';
 import AppError from '@shared/errors/AppError';
 import { hash } from 'bcryptjs';
 import { getCustomRepository } from 'typeorm';
@@ -21,6 +22,7 @@ interface IRequest {
   zip: string;
   contact: string;
   landline: string;
+  id_plan: string;
   stop_ads: boolean;
   all_ads: boolean;
   active: boolean;
@@ -44,11 +46,13 @@ class CreatePartnersService {
     zip,
     contact,
     landline,
+    id_plan,
     stop_ads,
     all_ads,
     active,
   }: IRequest): Promise<Partners> {
     const partnersRepository = getCustomRepository(PartnersRepositories);
+    const plansRepository = getCustomRepository(PlansRepository);
     const emailExists = await partnersRepository.findByEmail(email);
     const phoneExists = await partnersRepository.findByPhone(phone);
 
@@ -57,6 +61,14 @@ class CreatePartnersService {
     }
     if (phoneExists) {
       throw new AppError('Já existe esse telefone cadastrado.');
+    }
+
+    const plans = await plansRepository.findById(id_plan);
+    if (!plans?.active) {
+      throw new AppError('Plano inativo.');
+    }
+    if (!plans?.id) {
+      throw new AppError('Plano não encontrado.');
     }
 
     const hashedPassword = await hash(password, 8);
@@ -78,6 +90,7 @@ class CreatePartnersService {
       zip,
       contact,
       landline,
+      id_plan,
       stop_ads,
       all_ads,
       active,

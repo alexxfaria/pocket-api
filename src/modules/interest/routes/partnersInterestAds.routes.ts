@@ -18,4 +18,11 @@ interestAdsRouter.post(
   }),
   interestAdsController.create,
 );
+interestAdsRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: { id: Joi.string().uuid().required() },
+  }),
+  interestAdsController.delete,
+);
 export default interestAdsRouter;

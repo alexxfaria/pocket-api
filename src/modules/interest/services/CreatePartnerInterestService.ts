@@ -23,9 +23,16 @@ class CreatePartnerInterestService {
     if (!interest?.id) {
       throw new AppError('Interesse não encontrado.');
     }
+    if (!interest?.active) {
+      throw new AppError(`Interesse ${interest.name} esta inativo.`);
+    }
+
     const partner = await partnersRepository.findById(id_partners);
     if (!partner?.id) {
       throw new AppError('Parceiro não encontrado.');
+    }
+    if (!partner?.active) {
+      throw new AppError(`Parceiro ${partner.name} - ${partner.email} esta inativo.`);
     }
     await partnerInterestRepository.save(partnerInterest);
     return partnerInterest;

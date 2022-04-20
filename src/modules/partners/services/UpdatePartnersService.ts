@@ -1,3 +1,4 @@
+import PlansRepository from '@modules/plans/typeorm/repositories/PlansRepository';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import Partners from '../typeorm/entities/Partners';
@@ -20,6 +21,7 @@ interface IRequest {
   zip: string;
   contact: string;
   landline: string;
+  id_plan: string;
   stop_ads: boolean;
   all_ads: boolean;
   active: boolean;
@@ -43,11 +45,14 @@ class UpdatePartnersService {
     zip,
     contact,
     landline,
+    id_plan,
     stop_ads,
     all_ads,
     active,
   }: IRequest): Promise<Partners> {
     const partnersRepository = getCustomRepository(PartnersRepositories);
+    const plansRepository = getCustomRepository(PlansRepository);
+
     const partners = await partnersRepository.findById(id);
     if (!partners) {
       throw new AppError('Parceiro não existe.');
@@ -58,9 +63,16 @@ class UpdatePartnersService {
     if (partnersExists && email != partners.email) {
       throw new AppError('Email já esta sendo utilizado.');
     }
-
     if (phoneExists && phone != partners.phone) {
       throw new AppError('Telefone já esta sendo utilizado.');
+    }
+
+    const plans = await plansRepository.findById(id_plan);
+    if (!plans?.active) {
+      throw new AppError('Plano inativo.');
+    }
+    if (!plans?.id) {
+      throw new AppError('Plano não encontrado.');
     }
 
     partners.name = name;
@@ -78,6 +90,7 @@ class UpdatePartnersService {
     partners.zip = zip;
     partners.contact = contact;
     partners.landline = landline;
+    partners.id_plan = id_plan;
     partners.stop_ads = stop_ads;
     partners.all_ads = all_ads;
     partners.active = active;
