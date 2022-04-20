@@ -40,6 +40,14 @@ class UpdateAdsService {
       throw new AppError('Anuncio não existe');
     }
 
+    const partners = await partnersRepository.findById(id_partner);
+    if (!partners?.id) {
+      throw new AppError('Parceiro não encontrado.');
+    }
+    if (!partners?.active) {
+      throw new AppError('Parceiro esta inativo.');
+    }
+
     ads.description = description;
     ads.color = color;
     ads.measure = measure;
@@ -51,11 +59,6 @@ class UpdateAdsService {
     ads.validity_check = validity_check;
     ads.id_partner = id_partner;
     ads.active = active;
-
-    const partners = await partnersRepository.findById(id_partner);
-    if (!partners?.id) {
-      throw new AppError('Parceiro não encontrado.');
-    }
 
     await adsRepository.save(ads);
     return ads;

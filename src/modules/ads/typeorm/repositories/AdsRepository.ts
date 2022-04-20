@@ -20,5 +20,13 @@ class AdsRepository extends Repository<Ads> {
     });
     return ads;
   }
+  public async findByStatus(active: boolean): Promise<Ads | undefined> {
+    const ads = this.findOne({
+      where: {
+        active,
+      },
+    });
+    return ads;
+  }
 }
 export default AdsRepository;

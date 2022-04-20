@@ -11,10 +11,14 @@ interface IDescription {
   description: string;
 }
 
+interface IStatus {
+  active: boolean;
+}
+
 class ShowAdsService {
   public async execute({ id }: IRequest): Promise<Ads> {
     const adsRepository = getCustomRepository(AdsRepository);
-    const ads = await adsRepository.findOne(id);
+    const ads = await adsRepository.findById(id);
     if (!ads) {
       throw new AppError('Anúncio não encontrado.');
     }
@@ -22,7 +26,15 @@ class ShowAdsService {
   }
   public async descriptionid({ description }: IDescription): Promise<Ads> {
     const adsRepository = getCustomRepository(AdsRepository);
-    const ads = await adsRepository.findOne(description);
+    const ads = await adsRepository.findByDesc(description);
+    if (!ads) {
+      throw new AppError('Anúncio não encontrado.');
+    }
+    return ads;
+  }
+  public async status({ active }: IStatus): Promise<Ads> {
+    const adsRepository = getCustomRepository(AdsRepository);
+    const ads = await adsRepository.findByStatus(active);
     if (!ads) {
       throw new AppError('Anúncio não encontrado.');
     }
