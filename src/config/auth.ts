@@ -1,6 +1,7 @@
+const secret = process.env.SECRET;
 export default {
   jwt: {
-    secret: 'minhasenhasecreta',
+    secret: `${secret}`,
     expiresIn: '1d',
   },
 };
