@@ -63,13 +63,13 @@ class CreatePartnersService {
       throw new AppError('Já existe esse telefone cadastrado.');
     }
 
-    const plans = await plansRepository.findById(id_plan);
-    if (!plans?.active) {
-      throw new AppError('Plano inativo.');
-    }
-    if (!plans?.id) {
-      throw new AppError('Plano não encontrado.');
-    }
+    // const plans = await plansRepository.findById(id_plan);
+    // if (!plans?.active) {
+    //   throw new AppError('Plano inativo.');
+    // }
+    // if (!plans?.id) {
+    //   throw new AppError('Plano não encontrado.');
+    // }
 
     const hashedPassword = await hash(password, 8);
 
